@@ -16,8 +16,9 @@ function renderVideoResult(result,idx) {
       <h3>
       <a class="js-video-name" href="https://youtu.be/${result.id.videoId}" target="_blank">${result.snippet.title}</a>
       by&nbsp<a class="js-video-channel-name" href="https://www.youtube.com/channel/${result.snippet.channelId}" target="_blank">${result.snippet.channelTitle}</a></h3>
-      <div class='js-video-container'>
+      <div class='js-video-container tooltip'>
         <img class='js-video-thumbnail' id="video${idx}" src="${result.snippet.thumbnails.default.url}">
+        <div class='tooltiptext'>${result.snippet.title}</div>
         <div class='js-video-lightbox hidden' id="video${idx}-lightbox">
           <div class='js-video-player' id='js-player-container-${idx}'>
             <iframe id="${result.id.videoId}" type="text/html" width="640" height="390"
@@ -29,6 +30,10 @@ function renderVideoResult(result,idx) {
   </div>
   `;
 }
+
+// <span class="tooltip">Orange
+//   <span class="tooltiptext">a color so great it deserves its own page</span>
+// </span>
 
 // function renderChannelResult(result, idx) {
 //   return `
@@ -117,9 +122,19 @@ function openLightbox(id) { // video0, video1, etc.
 }
 
 function closeLightbox(id) {
+  //DOESN'T STOP PLAYING, JUST HIDES
   // detect click outside of lightbox
+  console.log('closeLightbox')
   $(`#${id}-lightbox`).addClass('hidden');
 }
+
+$("body").on("click", function(e){
+    if(!$('this').hasClass("js-video-lightbox")){
+      $(".js-video-lightbox").addClass("hidden");
+    }
+  }
+);
+
 
 // apply event listener to DOM
 function handleLightbox() {
