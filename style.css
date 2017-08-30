@@ -1,0 +1,16 @@
+.hidden {
+  display: none;
+}
+
+.js-video-container {
+  position: relative;
+}
+
+.js-video-lightbox {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 50vw;
+  height: 30vw;
+  background-color: black;
+}
